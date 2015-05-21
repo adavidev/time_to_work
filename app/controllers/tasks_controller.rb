@@ -1,10 +1,11 @@
 class TasksController < ApplicationController
+  before_action {redirect_to new_user_session_path unless current_user}
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = current_user ? current_user.tasks : []
   end
 
   # GET /tasks/1
