@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = current_user ? current_user.tasks : []
+    @tasks = current_user.tasks.not_done.order(:due)
   end
 
   # GET /tasks/1

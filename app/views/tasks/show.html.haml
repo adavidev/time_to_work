@@ -4,8 +4,11 @@
   %b Name:
   = @task.name
 %p
-  %b Context:
-  = @task.context
+  %b Contexts:
+  = @task.contexts.map{|r| r.name}.join(", ")
+%p
+  %b Projects:
+  = @task.projects.map{|r| r.name}.join(", ")
 %p
   %b Due:
   = @task.due
