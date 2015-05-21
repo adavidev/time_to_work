@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20150521123934) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.string   "context",    limit: 255
     t.date     "due"
     t.boolean  "done",       limit: 1
     t.datetime "created_at",             null: false

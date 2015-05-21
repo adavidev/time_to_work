@@ -11,6 +11,7 @@
     = @task.projects.map{|r| r.name}.join(", ")
   = f.input :due
   = f.input :done
+  = f.input :asap
 
   .form-actions
     = f.button :submit
