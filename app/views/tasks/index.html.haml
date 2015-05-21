@@ -1,12 +1,15 @@
 %h1 Listing tasks
 
-%table
+%table#task_table
   %thead
     %tr
-      %th Name
-      %th Context
-      %th Due
       %th Done
+      %th Name
+      %th ASAP
+      %th Due
+      %th Created
+      %th Context
+      %th Project
       %th
       %th
       %th
@@ -14,10 +17,13 @@
   %tbody
     - @tasks.each do |task|
       %tr
+        %td= check_box_tag("done", task.done, task.done)
         %td= task.name
-        %td= task.context
-        %td= task.due
-        %td= task.done
+        %td= check_box_tag("asap", task.asap, task.asap)
+        %td= task.due.strftime("%m/%d/%Y")
+        %td= task.created_at.strftime("%m/%d/%Y")
+        %td= task.contexts.map{|r| r.name}.join(", ")
+        %td= task.projects.map{|r| r.name}.join(", ")
         %td= link_to 'Show', task
         %td= link_to 'Edit', edit_task_path(task)
         %td= link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }

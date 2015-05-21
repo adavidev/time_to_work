@@ -43,3 +43,9 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
 end
+group :development do
+  gem 'pry-debugger', :platforms => :ruby_19
+  gem 'pry-byebug', :platforms => :ruby_20
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
+end
