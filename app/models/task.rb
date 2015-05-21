@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
   belongs_to :user
   has_many :contexts
-  has many :projects
+  has_many :projects
 end
