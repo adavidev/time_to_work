@@ -42,6 +42,7 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'
+  gem 'cucumber-rails', :require => false
 end
 group :development do
   gem 'pry-debugger', :platforms => :ruby_19
