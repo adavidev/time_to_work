@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action {redirect_to new_user_session_path unless current_user}
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
