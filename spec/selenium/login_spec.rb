@@ -79,9 +79,9 @@ describe "Login" do
   
   it "test_login" do
     @test_driver.goto_signin_page
-    @test_driver.try_login("richard.waskiewicz@sage.com", "badpass")
+    @test_driver.try_login("user@example.com", "badpass")
     @test_driver.test_text_element("flash_alert", "Invalid email or password.")
-    @test_driver.try_login("richard.waskiewicz@sage.com", "trustno1")
+    @test_driver.try_login("user@example.com", "changeme")
     @test_driver.test_text_element("flash_notice", "Signed in successfully.")
   end
 
