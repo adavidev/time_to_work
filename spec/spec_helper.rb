@@ -85,3 +85,67 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+class SelDriver < SimpleDelegator
+  attr_accessor :base_url
+
+  def initialize(browser, url)
+    super(Selenium::WebDriver.for(browser))
+    # @source = Selenium::WebDriver.for :firefox
+    @base_url = url
+    @accept_next_alert = true
+    manage.timeouts.implicit_wait = 30
+    @verification_errors = []
+  end
+
+  def quit
+    super
+    @verification_errors.should == []
+  end
+
+  def id(name)
+    find_element(:id, name)
+  end
+
+  def name(name)
+    find_element(:name, name)
+  end
+
+  def type(element, text)
+    element.clear
+    element.send_keys text
+  end
+
+  def element_present?(how, what)
+    find_element(how, what)
+    true
+  rescue Selenium::WebDriver::Error::NoSuchElementError
+    false
+  end
+
+  def alert_present?()
+    switch_to.alert
+    true
+  rescue Selenium::WebDriver::Error::NoAlertPresentError
+    false
+  end
+
+  def verify(&blk)
+    yield
+  rescue ExpectationNotMetError => ex
+    @verification_errors << ex
+  end
+
+  def close_alert_and_get_its_text(how, what)
+    alert = switch_to().alert()
+    alert_text = alert.text
+    if (@accept_next_alert) then
+      alert.accept()
+    else
+      alert.dismiss()
+    end
+    alert_text
+  ensure
+    @accept_next_alert = true
+  end
+end
