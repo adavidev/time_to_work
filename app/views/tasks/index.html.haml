@@ -16,11 +16,11 @@
 
   %tbody
     - @tasks.each do |task|
-      %tr
+      %tr{:id=>"task_#{task.id}"}
         %td= check_box_tag("done", task.done, task.done)
         %td= task.name
         %td= check_box_tag("asap", task.asap, task.asap)
-        %td= task.due.strftime("%m/%d/%Y")
+        %td= task.due.strftime("%m/%d/%Y") if task.due
         %td= task.created_at.strftime("%m/%d/%Y")
         %td= task.contexts.map{|r| r.name}.join(", ")
         %td= task.projects.map{|r| r.name}.join(", ")
